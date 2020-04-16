@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
-</head>
+</head> 
 <body>
 
 
@@ -48,6 +48,10 @@
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
+    .hour-hand,.min-hand,.second-hand{
+      transform-origin: 100%;
+      transition: 0.05s cubic-bezier(0.42, 0, 0.6, 2.76);
+    }
 
     .clock-face {
       position: relative;
@@ -65,9 +69,35 @@
     }
 
   </style>
-
+    
   <script>
+    
+    const hourHand = document.querySelector(".hour-hand");
+    const minHand = document.querySelector(".min-hand");
+    const secHand = document.querySelector(".second-hand");
 
+    function setDate() 
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+
+      const secDegree = ((seconds/60)*360);
+      const minDegree = ((minutes/60)*360);
+      const hourDegree = ((hours/60)*360);
+
+      hourHand.style.transform = `rotate(${hourDegree}deg)`;
+      minHand.style.transform = `rotate(${minDegree}deg)`;
+      secHand.style.transform = `rotate(${secDegree}deg)`;
+
+      console.log(now);
+      console.log(secDegree);
+      console.log(minDegree);
+      console.log(hourDegree);
+    }
+    setInterval(setDate, 1000);
+
+    setDate();
 
   </script>
 </body>
